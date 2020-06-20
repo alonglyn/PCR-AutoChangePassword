@@ -35,7 +35,7 @@ def change_password(df, mode = 0):
     try:
         for i in df.index:
             t = df.loc[i]
-            if t['pwdchanged'] != 0:
+            if t['pwdchanged']:
                 continue
             npw = generate_pw()
             print(t)
@@ -80,7 +80,7 @@ def change_mail(df, df_mail):
     try:
         for i in df.index:
             t = df.loc[i]
-            if t['mailchanged'] != 0:
+            if t['mailchanged']:
                 continue
             try:
                 bl.set_mail_df(df_mail)
