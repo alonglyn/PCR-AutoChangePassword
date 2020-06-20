@@ -1,5 +1,5 @@
 from core.data_help import *
-from core.bili_change import change_password, change_mail, check_login, reset_password
+from core.bili_change import change_password, change_mail, check_login
 from core.auto_mail import auto_add_mail
 import time
 import pandas as pd
@@ -128,8 +128,9 @@ if __name__ == "__main__":
             print(fnfe)
             exit(0)
         try:
-            sel = input('输入1,使用重置密码接口\n输入0使用修改密码接口\n(两个接口对IP的限制不统一， 一个结束了可以换另一个）、\n').strip()
+            sel = input('输入0使用重置密码接口\n输入1使用修改密码接口\n(两个接口对IP的限制不统一， 一个结束了可以换另一个）、\n').strip()
             assert(sel == '1' or sel == '0')
+            sel=int(sel)
             change_password(df_account,sel)
         except Exception as e:
             print(e)

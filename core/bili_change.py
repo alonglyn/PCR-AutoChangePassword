@@ -42,8 +42,10 @@ def change_password(df, mode = 0):
             bl.set_info(t['username'],t['userpwd'],t['mail_add'],npw)
             try:
                 if mode:
+                    print('使用修改密码模式')
                     bl.change_password()
                 else:
+                    print('使用重置密码模式')
                     bl.reset_password()
             except Exception as e:
                 print(e)

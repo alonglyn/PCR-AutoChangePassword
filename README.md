@@ -1,3 +1,4 @@
+[码云镜像地址](https://gitee.com/alonglyn_0/PCR-AutoChangePassword)
 # 脚本说明
 
 本脚本可以半自动地将 TB 上购买 pcr 游戏账号，进行改密和邮件换绑，平台为 windows, 需要一点配环境和语言基础（Python 小白 可能用不来）
@@ -9,19 +10,18 @@
   3. 自动进行换绑操作，更新邮箱，使用邮箱池
 
 # 软件安装要求
+安装过程有问题请咨询搜索引擎， 我这里给一些安装教程的参考链接。
 
-1. 网易邮箱大师（自己先登录一个邮箱）
-2. python3.8(win10 商店下载的就可以， 把 script 放到环境变量 PATH)
-3. [Chrome 浏览器](https://www.google.cn/chrome/)（最好是最新版）
+1. 网易邮箱大师（这个都会装吧）
+2. python3.7（3.8都可以）[教程参考链接](https://blog.csdn.net/yedaqiang/article/details/99681487)
+3. [Chrome浏览器和Chromedriver安装以及  环境变量配置  教程参考链接](https://blog.csdn.net/Booboochen/article/details/80531155)
+   1. [Chrome 浏览器下载地址](https://www.google.cn/chrome/)（最好是最新版）
+   2. [ChromeDriver下载地址](https://npm.taobao.org/mirrors/chromedriver/)
+   3. 关于如何找到Chrome的目录
 
-4. [ChromeDriver](https://npm.taobao.org/mirrors/chromedriver/)
-   下载对应 Chrome 浏览器版本的 ChromeDriver
-   把 ChromeDriver.exe 放到 Chrome.exe 所在目录
-   并将该目录加入 PATH(环境变量，下同)
+      ![chrome_step1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome1.jpg)
 
-   ![chrome_step1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome1.jpg)
-
-   ![chrome_step2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome2.jpg)
+      ![chrome_step2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome2.jpg)
 
 # 环境配置
 
@@ -34,8 +34,11 @@
 
 2. 创建 account.txt 和 mail.txt
    1. 把 data_example 目录重命名为 data
-   2. 在 demo/data 目录下创建 account.txt 和 mail.txt
-   3. 将 tb 买来的账号按照参考的格式复制到 account.txt 中（格式参考项目文件中的 account.txt)
+   2. 在 data 目录下创建 account.txt 和 mail.txt
+   3. 将 tb 买来的账号按照参考的格式复制到 account.txt 中（**格式参考项目文件中的 account.txt**)
+      1. 保证一行一个账号
+      2. 我们提取账号密码
+
    4. 同理，完成 mail.txt 的填写。
 
 # 脚本运行
@@ -61,6 +64,7 @@
 账户 txt 文件准备好后执行以下代码
 
 注意 0,1 要先执行， 才能生成 excel 文件， 执行后面的函数， 否则会报错。
+当然你也可以直接执行5
 
 **修改密码有两个方法， 在 Bilibili 类中有, 分别是**
 
@@ -71,18 +75,16 @@
 
 python3 main.py
 
-# choices = {
-#     0:'抽取B站账户',
-#     1:'抽取邮箱账户',
-#     2:'开始批量导入邮箱',
-#     3:'开始修改密码',
-#     4:'开始换绑邮箱',
-#     5:'依次进行0,1,2,3,4',
-#     6:'检查密码'
-# }
-
 ```
+运行结果如图所示
+![main](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/main.png)
 
+如果要一键提取成 群脚本的 txt就运行to_pcr.py
+```shell
+python3 to_pcr.py
+```
+会在根目录生成对应的代码
+前30个是mana号， 后面的都是装备号
 # 其他说明
 
 1. 表格中的 tag 列默认为 0， 一般是表示账号某个属性的状态， 0 表示未发生， 1 表示已发生， 其他表示异常， 如 used == 0,1,2 分别表示， 未使用，使用成功，已经被占用了。

@@ -34,7 +34,7 @@ def get_df(filename, columns):
     return pd.DataFrame(lines, columns=columns)
 
 def write_to_file(df_list, file_name, mode='w'):
-    prefix = 'C:\\Users\\along\\Documents\\雷电模拟器\\Pictures\\'
+    prefix = './'
     with open(os.path.join(prefix,file_name), mode) as f:
         for df in df_list:
             for i in df.index:
