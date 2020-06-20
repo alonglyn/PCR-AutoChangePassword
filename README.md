@@ -1,4 +1,5 @@
 [码云镜像地址](https://gitee.com/alonglyn_0/PCR-AutoChangePassword)
+[视频教程(投稿者不是本人)](https://b23.tv/0c4Aok)
 # 脚本说明
 
 本脚本可以半自动地将 TB 上购买 pcr 游戏账号，进行改密和邮件换绑，平台为 windows, 需要一点配环境和语言基础（Python 小白 可能用不来）

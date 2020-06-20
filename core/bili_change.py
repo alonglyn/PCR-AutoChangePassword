@@ -91,6 +91,7 @@ def change_mail(df, df_mail):
                 # cmd = input('发生错误是否继续?\n输入Y继续，直接输入回车结束检查错误')
                 # if cmd.strip() != 'Y':
                 #     break
+                break
             else:
                 df.loc[i,'mailchanged'] = 1
                 df.loc[i,'mail_add'] = df_mail.loc[index_mail,'mail_add']
