@@ -29,7 +29,7 @@
 
    ```shell
    # 在demo目录下打开powershell， 或者cmd, 安装相应包
-   pip install -r requirements.txt
+   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
    ```
 
 2. 创建 account.txt 和 mail.txt
@@ -66,17 +66,18 @@
 注意 0,1 要先执行， 才能生成 excel 文件， 执行后面的函数， 否则会报错。
 当然你也可以直接执行5
 
-**修改密码有两个方法， 在 Bilibili 类中有, 分别是**
-
-- reset_password：采用重置密码的方式（流程较短， 但是会比较快地被锁 IP）
-- change_password：要求先登录，再修改密码（流程较长， 但是一个 IP 一段时间内可以发大概 20 次邮箱）
-
+### 特别注意
+1. **特别提醒， 在执行脚本的时候绝对不能打开excel， 否则会导致脚本无法保存， 这样如果账号密码修改成功了， 因为无法保存就丢失密码了(当然命令行有历史记录可以找到随机的密码）**
+2. **修改密码有两个方法， 在 Bilibili 类中有, 分别是**
+   - reset_password：采用重置密码的方式（流程较短， 但是会比较快地被锁 IP）
+   - change_password：要求先登录，再修改密码（流程较长， 但是一个 IP 一段时间内可以发大概 20 次邮箱）
+3. **如果被锁IP了可以尝试使用你们的梯子，如果没有梯子，也可以用手机开热点，如果全部被锁只能等第二天了**
 ```shell
-
 python3 main.py
 
 ```
-运行结果如图所示
+
+运行结果如图所示（第一次运行，只要选5即可一键完成整个流程）
 ![main](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/main.png)
 
 如果要一键提取成 群脚本的 txt就运行to_pcr.py

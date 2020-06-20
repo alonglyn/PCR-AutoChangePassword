@@ -50,15 +50,15 @@ def change_password(df, mode = 0):
             except Exception as e:
                 print(e)
                 df.loc[i,'pwdchanged'] = -1
+                break
             except LoginException as le:
                 print(le)
                 df.loc[i,'available'] = 0
+                break
             else:
                 df.loc[i,'userpwd'] = npw
                 df.loc[i,'pwdchanged'] = 1
                 df.loc[i,'available'] = 1
-            finally:
-                bl.logout()
             
     except Exception as e:
         print('发生了其他错误')
@@ -88,7 +88,9 @@ def change_mail(df, df_mail):
                 index_mail = bl.change_mail()
             except Exception as e:
                 print(e)
-                break
+                # cmd = input('发生错误是否继续?\n输入Y继续，直接输入回车结束检查错误')
+                # if cmd.strip() != 'Y':
+                #     break
             else:
                 df.loc[i,'mailchanged'] = 1
                 df.loc[i,'mail_add'] = df_mail.loc[index_mail,'mail_add']
@@ -122,8 +124,8 @@ def check_login(df):
             except LoginException as le:
                 print(le)
                 df.loc[i,'available'] = 0
-            finally:
                 bl.logout()
+                
             
     except Exception as e:
         print('发生了其他错误')
