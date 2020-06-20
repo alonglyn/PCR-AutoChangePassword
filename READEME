@@ -19,9 +19,9 @@
    把 ChromeDriver.exe 放到 Chrome.exe 所在目录
    并将该目录加入 PATH(环境变量，下同)
 
-   ![chrome_step1](pictures/Chrome1.jpg)
+   ![chrome_step1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome1.jpg)
 
-   ![chrome_step2](pictures/Chrome2.jpg)
+   ![chrome_step2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome2.jpg)
 
 # 环境配置
 
@@ -52,9 +52,9 @@
 1. 结束后会自动 把密码和 pos 参数写入 config.py(后续可以直接改密码)
 
 这是参考图
-![mail1](pictures/mail1.png)
+![mail1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail1.png)
 
-![mail2](pictures/mail2.png)
+![mail2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail2.png)
 
 ## 运行主函数
 
