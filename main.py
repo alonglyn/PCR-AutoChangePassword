@@ -31,7 +31,7 @@ if __name__ == "__main__":
         add_all_mail(files[2],files[3])
     if cmd == 5 or cmd == 3:
         sel = notice_input(['使用重置密码接口','使用修改密码接口'])
-        change_password(files[2], sel)
+        change_password(files[2], sel=sel)
     if cmd == 5 or cmd == 4:
         change_mail(files[2],files[3])
     if cmd == 6:
