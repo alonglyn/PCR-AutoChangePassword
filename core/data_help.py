@@ -1,13 +1,40 @@
 import pandas as pd
-from random import choice
 import string
 import requests
 import os
 import re
+import functools
+from random import choice
 from config import password
 '''配置目录'''
 passchar = '_$.'+string.digits+string.ascii_letters
+mail_mode=r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}$'
 
+
+'''修饰器'''
+def with_open(func):
+    @functools.wraps(func)
+    def wrapper(*args, **kw):
+        try:
+            df_list = [pd.read_excel(i) for i in args]
+        except FileNotFoundError as fnfe:
+            print(fnfe)
+            exit(0)
+        try:
+            if 'sel' in kw.keys():
+                func(*df_list, sel=kw['sel'])
+            else:
+                func(*df_list)
+        except Exception as e:
+            print(e)
+        finally:
+            for i,v in enumerate(args):
+                df_list[i].to_excel(args[i],index=False)
+    return wrapper
+
+'''一些正则'''
+def mail_valid(mail):
+    return re.match(mail_mode,mail)
 
 
 

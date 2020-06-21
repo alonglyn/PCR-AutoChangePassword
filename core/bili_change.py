@@ -1,11 +1,14 @@
 from selenium import webdriver
 import pandas as pd
 from random import choice
+import time
 from core.bili_core import BiliBili,LoginException
-from core.data_help import generate_pw, addCol, generate_socket, get_socket_pool
+from core.data_help import generate_pw, addCol, generate_socket, get_socket_pool, with_open, get_df, append_to_df
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import TimeoutException
+from core.auto_mail import auto_add_mail
 
+'''selenium启动函数'''
 def lazy_capability():
     capa = DesiredCapabilities.CHROME
     capa["pageLoadStrategy"] = "none"
@@ -25,11 +28,13 @@ def lazy_browser():
     return browser
 
 
-def change_password(df, mode = 0):
+'''主要功能函数'''
+
+@with_open
+def change_password(df, sel):
     browser = webdriver.Chrome()
     addCol(df,'pwdchanged')
     bl = BiliBili(browser)
-
     end = False
     print(df.head())
     try:
@@ -41,12 +46,12 @@ def change_password(df, mode = 0):
             print(t)
             bl.set_info(t['username'],t['userpwd'],t['mail_add'],npw)
             try:
-                if mode:
-                    print('使用修改密码模式')
-                    bl.change_password()
-                else:
+                if sel == 0:
                     print('使用重置密码模式')
                     bl.reset_password()
+                else:
+                    print('使用修改密码模式')
+                    bl.change_password()
             except Exception as e:
                 print(e)
                 df.loc[i,'pwdchanged'] = -1
@@ -67,15 +72,12 @@ def change_password(df, mode = 0):
         # browser.close()
         pass
 
-        
+@with_open
 def change_mail(df, df_mail):
     browser = webdriver.Chrome()
     bl = BiliBili(browser)
-    
     addCol(df,'mailchanged')
-    
     addCol(df_mail,'used')
-
     print(df.head())
     try:
         for i in df.index:
@@ -104,7 +106,7 @@ def change_mail(df, df_mail):
     finally:
         # browser.close()
         pass
-
+@with_open
 def check_login(df):
     browser = webdriver.Chrome()
     addCol(df,'available')
@@ -134,3 +136,65 @@ def check_login(df):
     finally:
         # browser.close()
         pass
+
+
+@with_open
+def add_all_mail(*args):
+    input('将网易邮箱大师打开，弄到邮箱设置界面，再回来命令行敲回车。\n 然后迅速窗口切回网易邮箱大师，15s后会自动开始， 中间不能动鼠标也不能停止')
+    time.sleep(15)
+    for df in args:
+        auto_add_mail(args)
+
+def extract_account():    
+    notice1 = '''
+    根据账户账号密码的格式
+    输入账号密码列顺序（默认0123）
+    0:游戏账号
+    1:游戏密码
+    2:邮箱账号
+    3:邮箱密码
+
+    例如 游戏账号：pyuqwzd2esb游戏密码：qaw3sedrf邮箱账号:yz94904622@163.com邮箱密码:qh4561416
+    则输入 0 1 2 3
+    回车继续
+    '''
+    with open('data/account.txt','r') as f:
+        print(f.readline())
+    col_name = ['username','userpwd','mail_add','mail_pwd']
+    columns = input(notice1).strip().split()
+    if columns:
+        assert(set(columns) == {'0','1','2','3'})
+        
+        
+    else:
+        columns = [0,1,2,3]
+    columns = [col_name[int(i)] for i in columns]
+    df = get_df('data/account.txt', columns)
+    append_to_df(df, 'data/account.xlsx')
+
+def extract_mail():    
+    notice1 = '''
+    根据账户账号密码的格式
+    输入账号密码列顺序(默认0 1)
+    0:邮箱账号
+    1:邮箱密码
+
+    例如 邮箱账号:yz94904622@163.com邮箱密码:qh4561416
+    则输入 0 1
+    回车继续
+    '''
+    with open('data/mail.txt','r') as f:
+        print(f.readline())
+    col_name = ['mail_add','mail_pwd']
+    columns = input(notice1).strip().split()
+    if columns:
+        assert(set(columns) == {'0','1'})
+        
+    else:
+        columns = [0,1]
+    columns = [col_name[int(i)] for i in columns]
+
+
+    # 抽取邮箱信息
+    df = get_df('data/mail.txt', columns)
+    append_to_df(df, 'data/mail.xlsx')

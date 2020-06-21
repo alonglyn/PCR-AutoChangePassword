@@ -36,6 +36,7 @@ class WebDriverHelp():
     def __init__(self):
         super().__init__()
     def wait_for(self,a,b,max_times = 6):
+        '''超时重试，默认6次'''
         times = 0
         while True:
             times+=1
@@ -50,32 +51,48 @@ class WebDriverHelp():
                 return ret
 
     def wait_for_class(self, e, cls,max_times = 60):
+        '''检查已存在元素是否具有某属性, 默认2min'''
         times = 0
         while cls not in e.get_attribute('class').split():
             times+=1
             if times > max_times:
                 raise TimeoutException('邮件无法发送等错误')
-            print('等待验证码或其他',times*2,'s')
-            time.sleep(2)
+            if times % 5 == 0:
+                print('等待验证码或其他',times,'s')
+            time.sleep(1)
 
     def wait_for_visible(self, e, mode = True, max_times = 10):
+        '''检查元素是否可见，每秒1次， 默认10s'''
         times = 0
         while True:
             times += 1
-            print(times)
-            time.sleep(1)
             res = e.is_displayed()
-            print(res)
+            # print(res)
             if bool(res) == mode:
                 break
+            # print(times)
             if times > max_times:
                 raise TimeoutException('可见等待超时')
-                
+            time.sleep(1)
+
+    def wait_for_text(self, e,max_times = 60):
+        '''等待元素出现文本, 返回改文本， 超时则抛出异常'''
+        times = 0
+        while True:
+            times+=1
+            msg = e.text
+            if msg:
+                return msg
+            if times % 5 == 0:
+                print('等待文本',times,'s')
+            if times >= max_times:
+                raise TimeoutException('等待文本超时')
+            time.sleep(1)
 
     def single(self,b,c):
-        return self.wait.until(EC.presence_of_element_located((b, c)))
+        return self.wait.until(EC.presence_of_element_located((b, c)),'等待元素超时')
     def multi(self,b,c):
-        return self.wait.until(EC.presence_of_all_elements_located((b, c)))
+        return self.wait.until(EC.presence_of_all_elements_located((b, c)),'等待元素超时')
         
     def trans_handle(self):
         self.browser.switch_to_window(self.handle)
@@ -258,7 +275,8 @@ class BiliBili(SliderCrack, WebDriverHelp):
     def set_mail_df(self, df):
         self.mail_df = df
         print(self.mail_df.head())
-    
+
+
     def set_info(self,username,password,mail_add,new_password='qwerfdsa'):
         self.username = username
         self.password = password
@@ -287,12 +305,12 @@ class BiliBili(SliderCrack, WebDriverHelp):
 
 
     def re_apply_mail(self,times):
-        if times >= 6:
+        if times >= 10:
             raise NoMailException('连续邮箱失败次数过多，请检查邮箱文件')
         
         index = generate_mail(self.mail_df)
         if index == -1:
-            raise NoMailException()
+            raise NoMailException('无可用邮箱了')
         print(self.mail_df.loc[index,'mail_add'])
         box = self.single(By.XPATH,'//*[@id="app"]/div[3]/div/div[2]/div/div[2]/div/div[1]/div[1]/input')
         box.clear()
@@ -300,31 +318,21 @@ class BiliBili(SliderCrack, WebDriverHelp):
         time.sleep(0.3)
         self.single(By.XPATH,'//*[@id="app"]/div[3]/div/div[2]/div/div[2]/div/div[2]/div[1]/button').click()
         shadow_panel = self.single(By.CSS_SELECTOR,'body > div.geetest_panel.geetest_wind')
-
         # 等待拼图验证码
         self.wait_for_visible(shadow_panel)
-
         # 拼图验证码结束
         self.wait_for_visible(shadow_panel,False,30)
-
         # 检查是否重复
-        tt = 1
-        while True:
-            msg = self.single(By.XPATH ,'//*[@id="app"]/div[3]/div/div[2]/div/div[2]/div/div[2]/div[2]').text
-            print(msg)
-            time.sleep(2)
-            print(tt*2,'s')
-            if msg:
-                break
-            tt+=1
-
+        form_box = self.single(By.XPATH, '//*[@id="app"]/div[3]/div/div[2]/div/div[2]/div/div[2]/div[2]')
+        msg = self.wait_for_text(form_box)
+        print(msg)
         if msg == '发送成功':
             return index
         else:
-            print('邮箱被占用，换下一个')
             self.mail_df.loc[index,'used'] = 2
-            print(self.mail_df.loc[index])
+            # print(self.mail_df.loc[index])
             return self.re_apply_mail(times+1)
+
         # self.mail_df.loc[index,'used'] = 1
 
 
@@ -365,7 +373,7 @@ class BiliBili(SliderCrack, WebDriverHelp):
             step3 = self.single(By.XPATH, '//*[@id="app"]/div[3]/div/div[2]/div/div[1]/div/div/div/a[3]')
             self.wait_for_class(step3,'active')
             self.logout()
-            print('index_mail = ', index)
+            # print('index_mail = ', index)
             return index
 
 
