@@ -7,7 +7,7 @@ import functools
 from random import choice
 from config import password
 '''配置目录'''
-passchar = '_$.'+string.digits+string.ascii_letters
+passchar = '_$.;!~'+string.digits+string.ascii_letters
 mail_mode=r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}$'
 
 
@@ -21,10 +21,7 @@ def with_open(func):
             print(fnfe)
             exit(0)
         try:
-            if 'sel' in kw.keys():
-                func(*df_list, sel=kw['sel'])
-            else:
-                func(*df_list)
+            func(*df_list, **kw)
         except Exception as e:
             print(e)
         finally:
@@ -32,12 +29,10 @@ def with_open(func):
                 df_list[i].to_excel(args[i],index=False)
     return wrapper
 
+
 '''一些正则'''
 def mail_valid(mail):
     return re.match(mail_mode,mail)
-
-
-
 
 
 '''DataFrame'''
@@ -85,7 +80,7 @@ def generate_pw():
     if password:
         return password
     else:
-        return ''.join([choice(passchar) for _ in range(8)])
+        return ''.join([choice(passchar) for _ in range(12)])
 
 def get_socket_pool():
     pools = requests.get('http://api.wandoudl.com/api/ip?app_key=a6cec112e480cc7b8790b118dd17cb5f&pack=0&num=20&xy=1&type=1&lb=\r\n&mr=1&').text.split()

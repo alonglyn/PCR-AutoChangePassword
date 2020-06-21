@@ -20,6 +20,7 @@ if __name__ == "__main__":
         '开始换绑邮箱',
         '依次进行0,1,2,3,4',
         '检查密码',
+        '导出账号txt文本到指定目录',
         '生成gmail邮箱分身'
     ]
     cmd = notice_input(choices)
@@ -36,3 +37,7 @@ if __name__ == "__main__":
         change_mail(files[2],files[3])
     if cmd == 6:
         check_login(files[2])
+    if cmd == 7:
+        to_pcr()
+    if cmd == 8:
+        generate_gmail(files[3])

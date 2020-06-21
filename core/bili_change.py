@@ -3,7 +3,7 @@ import pandas as pd
 from random import choice
 import time
 from core.bili_core import BiliBili,LoginException
-from core.data_help import generate_pw, addCol, generate_socket, get_socket_pool, with_open, get_df, append_to_df
+from core.data_help import *
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common.exceptions import TimeoutException
 from core.auto_mail import auto_add_mail
@@ -30,20 +30,60 @@ def lazy_browser():
 
 '''主要功能函数'''
 
+
+
+def to_pcr():
+    df = pd.read_excel('data/account.xlsx')
+    bound = int(input('输入最后一个mana号的编号， 例如前30个号是mana号， 则输入30(默认为30)\n').strip())
+    if not bound:
+        bound = 30
+    df1 = df.loc[0:bound]
+    df2 = df.loc[bound:]
+    while True:
+        prefix = input('输入脚本需要代码所在目录绝对路径,自动生成到目标目录下，如果不输入请直接回车， 账号密码会放在本目录\n').strip()
+        if not prefix:
+            break
+        if  os.path.isdir(prefix):
+            break
+        else:
+            print('未找到目标目录， 请输入正确的目录或者直接回车\n')
+    
+    write_to_file([df1],'pcr_farm_mana.txt',prefix)
+    write_to_file([df2],'pcr_farm_zb.txt',prefix)
+    write_to_file([df1,df2],'pcr_farm_all.txt',prefix)
+
+@with_open
+def generate_gmail(df):
+    while True:
+        gmail = input('输入gmail邮箱，用户名不能包括.和+如alonglyn@gmail.com\n').strip()
+        if mail_valid(gmail):
+            break
+        else:
+            print('格式错误，请重新输入')
+    (prefix, suffix) = gmail.split('@')
+    for mid in ['.','+']:
+        for i in range(len(prefix)):
+            gmail_new = prefix[:i]+mid+prefix[i:]
+            line = [None for _ in df.columns]
+            line[0] = gmail_new+'@'+suffix
+            addCol(df, 'added')
+            df.loc[len(df)] = line
+            df.loc[len(df)-1,'added'] = 1
+
 @with_open
 def change_password(df, sel):
     browser = webdriver.Chrome()
     addCol(df,'pwdchanged')
     bl = BiliBili(browser)
     end = False
-    print(df.head())
+    # print(df.head())
     try:
         for i in df.index:
             t = df.loc[i]
             if t['pwdchanged']:
                 continue
             npw = generate_pw()
-            print(t)
+            # print(t)
             bl.set_info(t['username'],t['userpwd'],t['mail_add'],npw)
             try:
                 if sel == 0:
@@ -78,7 +118,7 @@ def change_mail(df, df_mail):
     bl = BiliBili(browser)
     addCol(df,'mailchanged')
     addCol(df_mail,'used')
-    print(df.head())
+    # print(df.head())
     try:
         for i in df.index:
             t = df.loc[i]
@@ -112,7 +152,7 @@ def check_login(df):
     addCol(df,'available')
     bl = BiliBili(browser)
 
-    print(df.head())
+    # print(df.head())
     try:
         for i in df.index:
             t = df.loc[i]
