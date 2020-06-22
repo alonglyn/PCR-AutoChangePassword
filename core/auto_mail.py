@@ -13,7 +13,7 @@ class WinMouseKeyBorad():
     def rel_pos(self, rx, ry):
         return int(self.width * rx), int(self.height * ry)
 
-    def add_one(self, address, password):
+    def add_one(self, address, password, time_delay):
         pag.moveTo(pos1) # 填添加邮件的点
         pag.sleep(0.2)
         pag.click()
@@ -25,16 +25,16 @@ class WinMouseKeyBorad():
         pag.typewrite(password)
         pag.moveTo(pos2) # 填登录的点
         pag.click()
-        time.sleep(0.5)
+        time.sleep(time_delay)
         pag.moveTo(pos3) # 填x掉小窗口的点
         pag.click()
 
-def auto_add_mail(df):
+def auto_add_mail(df, time_delay = 1):
     wmkb = WinMouseKeyBorad()
     addCol(df,'added')
     for i in df.index:
         if df.loc[i,'added'] == 0:
-            wmkb.add_one(df.loc[i,'mail_add'], df.loc[i, 'mail_pwd'])
+            wmkb.add_one(df.loc[i,'mail_add'], df.loc[i, 'mail_pwd'], time_delay)
             df.loc[i,'added'] = 1
 def test():
     print('尽快将鼠标放在邮箱界面的添加邮箱 处 停止15s,会自动点击 \

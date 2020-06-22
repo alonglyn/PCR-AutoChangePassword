@@ -55,7 +55,7 @@ def to_pcr():
     write_to_file([df1,df2],'pcr_farm_all.txt',prefix)
 
 @with_open
-def generate_gmail(df):
+def generate_gmail(df, left=1,right=100):
     while True:
         gmail = input('输入gmail邮箱，用户名不能包括.和+如alonglyn@gmail.com\n').strip()
         if mail_valid(gmail):
@@ -63,14 +63,23 @@ def generate_gmail(df):
         else:
             print('格式错误，请重新输入')
     (prefix, suffix) = gmail.split('@')
-    for mid in ['.','+']:
-        for i in range(len(prefix)):
-            gmail_new = prefix[:i]+mid+prefix[i:]
-            line = [None for _ in df.columns]
-            line[0] = gmail_new+'@'+suffix
-            addCol(df, 'added')
-            df.loc[len(df)] = line
-            df.loc[len(df)-1,'added'] = 1
+
+    # for mid in ['.','+']:
+    #     for i in range(len(prefix)):
+    #         gmail_new = prefix[:i]+mid+prefix[i:]
+    #         line = [None for _ in df.columns]
+    #         line[0] = gmail_new+'@'+suffix
+    #         addCol(df, 'added')
+    #         df.loc[len(df)] = line
+    #         df.loc[len(df)-1,'added'] = 1
+    for j in range(left,right+1):
+        if j%5 == 0:
+            print('第',j,'个')
+        line = [None for _ in df.columns]
+        line[0] = prefix+'+%d@'%j+suffix
+        addCol(df, 'added')
+        df.loc[len(df)] = line
+        df.loc[len(df)-1,'added'] = 1
 
 @with_open
 def change_password(df, sel):
@@ -182,9 +191,9 @@ def check_login(df):
 
 
 @with_open
-def add_all_mail(*args):
+def add_all_mail(*args, time_delay):
     for df in args:
-        auto_add_mail(df)
+        auto_add_mail(df,time_delay)
 
 def extract_account():    
     notice1 = '''
