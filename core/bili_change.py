@@ -199,7 +199,7 @@ def extract_account():
     则输入 0 1 2 3
     回车继续
     '''
-    with open('data/account.txt','r') as f:
+    with open('data/account.txt','r',encoding='utf-8') as f:
         print(f.readline())
     col_name = ['username','userpwd','mail_add','mail_pwd']
     columns = input(notice1).strip().split()
@@ -224,7 +224,7 @@ def extract_mail():
     则输入 0 1
     回车继续
     '''
-    with open('data/mail.txt','r') as f:
+    with open('data/mail.txt','r',encoding='utf-8') as f:
         print(f.readline())
     col_name = ['mail_add','mail_pwd']
     columns = input(notice1).strip().split()
