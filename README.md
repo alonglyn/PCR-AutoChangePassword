@@ -1,5 +1,18 @@
 [码云镜像地址](https://gitee.com/alonglyn_0/PCR-AutoChangePassword)
-[视频教程(投稿者不是本人)](https://b23.tv/0c4Aok)
+
+[老版本视频教程(投稿者不是本人)](https://b23.tv/0c4Aok)
+# 新版本说明
+把下载谷歌浏览器等步骤写成了脚本可自动下载安装
+
+
+## 快速使用（小白请按照安装文档来一步步完成）
+1. 安装好python3，pip（添加环境变量）和网易邮箱大师，
+
+1. 双击config.bat，完成配置
+
+1. 然后双击start.bat，开始使用
+
+
 # 脚本说明
 
 本脚本可以半自动地将 TB 上购买 pcr 游戏账号，进行改密和邮件换绑，平台为 windows, 需要一点配环境和语言基础（Python 小白 可能用不来）
@@ -29,26 +42,28 @@
 安装过程有问题请咨询搜索引擎， 我这里给一些安装教程的参考链接。
 
 1. 网易邮箱大师（这个都会装吧）
-2. python3.7（3.8都可以）[教程参考链接](https://blog.csdn.net/yedaqiang/article/details/99681487)
-3. [Chrome浏览器和Chromedriver安装以及  环境变量配置  教程参考链接](https://blog.csdn.net/Booboochen/article/details/80531155)
-   1. [Chrome 浏览器下载地址](https://www.google.cn/chrome/)（最好是最新版）
-   2. [ChromeDriver下载地址](https://npm.taobao.org/mirrors/chromedriver/)
-   3. 关于如何找到Chrome的目录
-
-      ![chrome_step1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome1.jpg)
-
-      ![chrome_step2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/Chrome2.jpg)
+2. python3.7，和pip （记得添加环境变量）[教程参考链接](https://blog.csdn.net/yedaqiang/article/details/99681487)
 
 # 环境配置
 
-1. 安装 python3 的包
+1. 双击config.bat， 按照提示完成
+   1. python包的安装
+   2. 默认密码的设置
+   3. 邮箱大师自动添加的录制
+   4. 谷歌浏览器的自动下载和安装（如果出错请手动安装再运行脚本，跳过这一步， 并联系我）
+   5. chromedriver的自动下载
 
-   ```shell
-   # 在demo目录下打开powershell， 或者cmd, 安装相应包
-   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --user
-   ```
+   特别讲一下录制的步骤。由于每个人分辨率不同， 所以需要设置 3 个点击点， 按照提示进行即可。运行后的大概流程是
 
-2. 创建 account.txt 和 mail.txt
+   1. 提示输入密码，直接回车则使用随机密码
+   1. 分别按顺序在下面 3 个位置分别停留 15s 以上， 到时间鼠标会自动点击， 然后你再移动到下一个位置。
+   1. 结束后会自动 把密码和 pos 参数写入 config.py(后续可以直接改密码)
+      ![mail1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail1.png)
+
+      ![mail2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail2.png)
+
+
+2. 把账号密码复制到 account.txt 和 mail.txt
    1. 把 data_example 目录重命名为 data
    2. 在 data 目录下创建 account.txt 和 mail.txt
    3. 将 tb 买来的账号按照参考的格式复制到 account.txt 中（**格式参考项目文件中的 account.txt**)
@@ -59,28 +74,9 @@
 
 # 脚本运行
 
-## 配置文件
+双击`start.bat`即可， 如果报错， 请检查前面的步骤是否完成， 软件是否安装好
 
-**在环境配置好后， 提前打开网易邮箱大师， 全屏**
-运行`python3 set_config.py`按照提示输入改密的密码， 或者由系统随机
-由于每个人分辨率不同， 所以需要设置 3 个点击点， 按照提示进行即可
-运行后的大概流程是
-
-1. 提示输入密码，直接回车则使用随机密码
-1. 分别按顺序在下面 3 个位置分别停留 15s 以上， 到时间鼠标会自动点击， 然后你再移动到下一个位置。
-1. 结束后会自动 把密码和 pos 参数写入 config.py(后续可以直接改密码)
-
-这是参考图
-![mail1](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail1.png)
-
-![mail2](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/mail2.png)
-
-## 运行主函数
-
-账户 txt 文件准备好后执行以下代码
-
-注意 0,1 要先执行， 才能生成 excel 文件， 执行后面的函数， 否则会报错。
-当然你也可以直接执行5
+![main](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/main.jpg)
 
 ### 特别注意
 1. **特别提醒， 在执行脚本的时候绝对不能打开excel， 否则会导致脚本无法保存， 这样如果账号密码修改成功了， 因为无法保存就丢失密码了(当然命令行有历史记录可以找到随机的密码）**
@@ -88,20 +84,6 @@
    - reset_password：采用重置密码的方式（流程较短， 但是会比较快地被锁 IP）
    - change_password：要求先登录，再修改密码（流程较长， 但是一个 IP 一段时间内可以发大概 20 次邮箱）
 3. **如果被锁IP了可以尝试使用你们的梯子，如果没有梯子，也可以用手机开热点，如果全部被锁只能等第二天了**
-```shell
-python3 main.py
-
-```
-
-运行结果如图所示（第一次运行，只要选5即可一键完成整个流程）
-![main](https://gitee.com/alonglyn_0/PCR-AutoChangePassword/raw/master/pictures/main.png)
-
-如果要一键提取成 群脚本的 txt就运行to_pcr.py
-```shell
-python3 to_pcr.py
-```
-会在根目录生成对应的代码
-前30个是mana号， 后面的都是装备号
 # 其他说明
 
 1. 表格中的 tag 列默认为 0， 一般是表示账号某个属性的状态， 0 表示未发生， 1 表示已发生， 其他表示异常， 如 used == 0,1,2 分别表示， 未使用，使用成功，已经被占用了。
