@@ -5,3 +5,6 @@ __pycache__/
 /data/
 *.git*
 .git/
+set_config.py
+*.exe
+*.zip
