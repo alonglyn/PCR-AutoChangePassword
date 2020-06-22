@@ -27,7 +27,9 @@ def lazy_browser():
     browser = webdriver.Chrome(desired_capabilities=capa)
     return browser
 
-
+def get_browser():
+    browser = webdriver.Chrome(executable_path='chromedriver.exe')
+    return browser
 '''主要功能函数'''
 
 
@@ -83,7 +85,7 @@ def generate_gmail(df, left=1,right=100):
 
 @with_open
 def change_password(df, sel):
-    browser = webdriver.Chrome()
+    browser = get_browser()
     addCol(df,'pwdchanged')
     bl = BiliBili(browser)
     end = False
@@ -125,7 +127,7 @@ def change_password(df, sel):
 
 @with_open
 def change_mail(df, df_mail):
-    browser = webdriver.Chrome()
+    browser = get_browser()
     bl = BiliBili(browser)
     addCol(df,'mailchanged')
     addCol(df_mail,'used')
@@ -160,7 +162,7 @@ def change_mail(df, df_mail):
         pass
 @with_open
 def check_login(df):
-    browser = webdriver.Chrome()
+    browser = get_browser()
     addCol(df,'available')
     bl = BiliBili(browser)
 

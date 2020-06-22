@@ -278,10 +278,10 @@ class BiliBili(SliderCrack, WebDriverHelp):
 
 
     def set_info(self,username,password,mail_add,new_password='qwerfdsa'):
-        self.username = username
-        self.password = password
-        self.new_password = new_password
-        self.mail_add = mail_add
+        self.username = str(username)
+        self.password = str(password)
+        self.new_password = str(new_password)
+        self.mail_add = str(mail_add)
         print(self.username, self.password,self.mail_add,self.new_password)
 
 
@@ -338,6 +338,7 @@ class BiliBili(SliderCrack, WebDriverHelp):
         try:
             self.login()
         except Exception as e:
+            print(e)
             raise LoginException('%s\n登录发生错误认为是密码错误，账号标记为不可用'%str(e))
         self.browser.get('https://passport.bilibili.com/account/security#/setpassword/mail/verify')
         # link_change_password = self.single(By.LINK_TEXT,'修改密码')
@@ -356,6 +357,7 @@ class BiliBili(SliderCrack, WebDriverHelp):
         try:
             self.login()
         except Exception as e:
+            print(e)
             raise LoginException('%s\n登录发生错误认为是密码错误，账号标记为不可用'%str(e))
         self.browser.get('https://passport.bilibili.com/account/security#/bindmail/mail/verify')
         # link_change_password = self.single(By.LINK_TEXT,'修改密码')

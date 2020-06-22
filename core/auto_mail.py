@@ -36,53 +36,7 @@ def auto_add_mail(df, time_delay = 1):
         if df.loc[i,'added'] == 0:
             wmkb.add_one(df.loc[i,'mail_add'], df.loc[i, 'mail_pwd'], time_delay)
             df.loc[i,'added'] = 1
-def test():
-    print('尽快将鼠标放在邮箱界面的添加邮箱 处 停止15s,会自动点击 \
-        然后放在登录按钮上15s,会自动点击\
-        然后放在关闭按钮上15s,会自动点击')
-    sz = pag.size()
-    times = 0
-    d = dict()
-    ret = []
-        # print(pag.position())
-    try:
-        cp = 0
-        while True:
-            pos = pag.position()
-            # print(pos.x,',', pos.y)
-            if pos in d.keys():
-                d[pos] += 1
-            else:
-                d[pos] = 1
-            if d[pos] >= 15:
-                ret.append((pos.x,pos.y))
-                d[pos] = -20
-                cp += 1
-                
-                pag.click()
-                if cp == 1:
-                    time.sleep(0.1)
-                    pag.typewrite('test@163.com')
-                    time.sleep(0.1)
-                    pag.press('tab')
-                    time.sleep(0.1)
-                    pag.typewrite('testtest')
-                
-            if cp >= 3:
-                break
-            time.sleep(1)
-            times+=1
-            
-    except (KeyboardInterrupt,Exception) as e:
-        print(e)
-        print('发生错误输出停留时间最长的三个坐标， 请重新运行')
-        kvs = list(d.items())
-        kvs.sort(key = lambda x:x[1])
-        kvs.reverse()
-        for kv in kvs[:3]:
-            ret.append(kv[0].x,kv[0].y)
-    finally:
-        return ret
+
 
 
 

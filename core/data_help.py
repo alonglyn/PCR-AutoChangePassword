@@ -6,9 +6,24 @@ import re
 import functools
 from random import choice
 from config import password
+
 '''配置目录'''
 passchar = '_$.;!~'+string.digits+string.ascii_letters
 mail_mode=r'^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+){0,4}$'
+
+
+
+'''一些提示输入'''
+def notice_input(choices, text = '输入对应的编号后回车(不能有多余输入)，默认输入0'):
+    '''choices是选项列表， text是开头提示文字'''
+    for i,v in enumerate(choices):
+        text+='\n%d:%s'%(i,choices[i])
+    sel = input(text+'\n').strip()
+    if not sel:
+        sel = 0
+    else:
+        sel = int(sel)
+    return sel
 
 
 '''修饰器'''

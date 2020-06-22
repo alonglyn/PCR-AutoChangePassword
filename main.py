@@ -1,16 +1,7 @@
 from core.bili_change import *
+from core.data_help import notice_input
 
 
-def notice_input(choices, text = '输入对应的编号后回车(不能有多余输入)，默认输入0'):
-    '''choices是选项列表， text是开头提示文字'''
-    for i,v in enumerate(choices):
-        text+='\n%d:%s'%(i,choices[i])
-    sel = input(text+'\n').strip()
-    if not sel:
-        sel = 0
-    else:
-        sel = int(sel)
-    return sel
 
 if __name__ == "__main__":
     files = ['data/account.txt', 'data/mail.txt', 'data/account.xlsx', 'data/mail.xlsx']
