@@ -48,7 +48,7 @@ def extract(s):
     return sp.sub(' ',s).strip().split()
 
 def get_df(filename, columns):
-    with open(filename) as f:
+    with open(filename,'r',encoding='utf-8') as f:
         lines = f.readlines()
 
     lines = [extract(line) for line in lines if line]
