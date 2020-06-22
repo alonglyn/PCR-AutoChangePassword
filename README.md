@@ -30,7 +30,7 @@
 
    ```shell
    # 在demo目录下打开powershell， 或者cmd, 安装相应包
-   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+   pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --user
    ```
 
 2. 创建 account.txt 和 mail.txt

@@ -302,8 +302,6 @@ class BiliBili(SliderCrack, WebDriverHelp):
     def check_lock_IP(self):
         pass
         
-
-
     def re_apply_mail(self,times):
         if times >= 10:
             raise NoMailException('连续邮箱失败次数过多，请检查邮箱文件')

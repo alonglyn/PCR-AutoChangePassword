@@ -1,13 +1,15 @@
 from core.bili_change import *
 
 
-def notice_input(choices, text = '输入对应的编号后回车(不能有多余输入)'):
+def notice_input(choices, text = '输入对应的编号后回车(不能有多余输入)，默认输入0'):
     '''choices是选项列表， text是开头提示文字'''
     for i,v in enumerate(choices):
         text+='\n%d:%s'%(i,choices[i])
     sel = input(text+'\n').strip()
-    # assert(sel == '1' or sel == '0')
-    sel = int(sel)
+    if not sel:
+        sel = 0
+    else:
+        sel = int(sel)
     return sel
 
 if __name__ == "__main__":
@@ -29,7 +31,13 @@ if __name__ == "__main__":
     if cmd == 5 or cmd == 1:
         extract_mail()
     if cmd == 5 or cmd == 2:
-        add_all_mail(files[2],files[3])
+        sel = notice_input(['添加全部邮箱', '仅添加账号绑定的邮箱','仅添加未绑定的邮箱'])
+        input('将网易邮箱大师打开，弄到邮箱设置界面，再回来命令行敲回车。\n 然后迅速窗口切回网易邮箱大师，15s后会自动开始， 中间不能动鼠标也不能停止\n')
+        time.sleep(15)
+        if sel == 0 or sel == 1:
+            add_all_mail(files[2])
+        if sel == 0 or sel == 2:
+            add_all_mail(files[3])
     if cmd == 5 or cmd == 3:
         sel = notice_input(['使用重置密码接口','使用修改密码接口'])
         change_password(files[2], sel=sel)

@@ -34,9 +34,11 @@ def lazy_browser():
 
 def to_pcr():
     df = pd.read_excel('data/account.xlsx')
-    bound = int(input('输入最后一个mana号的编号， 例如前30个号是mana号， 则输入30(默认为30)\n').strip())
+    bound = input('输入最后一个mana号的编号， 例如前30个号是mana号， 则输入30(默认为30)\n').strip()
     if not bound:
         bound = 30
+    else:
+        bound = int(bound)
     df1 = df.loc[0:bound]
     df2 = df.loc[bound:]
     while True:
@@ -181,10 +183,8 @@ def check_login(df):
 
 @with_open
 def add_all_mail(*args):
-    input('将网易邮箱大师打开，弄到邮箱设置界面，再回来命令行敲回车。\n 然后迅速窗口切回网易邮箱大师，15s后会自动开始， 中间不能动鼠标也不能停止')
-    time.sleep(15)
     for df in args:
-        auto_add_mail(args)
+        auto_add_mail(df)
 
 def extract_account():    
     notice1 = '''
