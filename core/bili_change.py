@@ -140,6 +140,7 @@ def change_mail(df, df_mail):
                 df.loc[i,'mail_pwd'] = df_mail.loc[index_mail,'mail_pwd']
                 # mailchanged
                 df_mail.loc[i,'used'] = 1
+                bl.mail_df.loc[i,'used'] = 1
     except Exception as e:
         print('发生了其他错误')
         print(e)
