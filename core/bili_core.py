@@ -381,7 +381,7 @@ class BiliBili(SliderCrack, WebDriverHelp):
     def reset_password(self):
         self.browser.get('https://passport.bilibili.com/register/findpassword.html#/verify?gourl=https%3A%2F%2Fwww.bilibili.com%2F')
         self.single(By.XPATH,'//*[@id="app"]/div[3]/div/div[3]/div[1]/div[1]/input').send_keys(self.mail_add)
-        time.sleep(0.3)
+        time.sleep(0.8)
         self.single(By.XPATH,'//*[@id="app"]/div[3]/div/div[3]/div[2]/button').click()
         #input()
         # self.run_slider()

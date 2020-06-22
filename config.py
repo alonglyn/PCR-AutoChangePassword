@@ -1,4 +1,4 @@
-password = 'test'
+password = ''
 
 pos1 = (0,0)
 
