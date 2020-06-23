@@ -9,7 +9,7 @@
 [notepad++下载地址(用迅雷下载快)](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.8.1/npp.7.8.1.bin.x64.zip)
 
 0. 下载脚本
-   1. `git clone git config --global core.autocrlf false` 用git克隆， 不会有任何问题
+   1. `git clone https://gitee.com/alonglyn_0/PCR-AutoChangePassword` 用git克隆， 不会有任何问题
    2. **超级重要90%的人死在这里**
       
       网页上download， 你需要用notepad++或者其他编辑器， 把3个`.bat`文件改成CRLF， 同理`account.txt`和`mail.txt`也改成CRLF
