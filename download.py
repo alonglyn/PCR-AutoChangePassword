@@ -77,8 +77,10 @@ def unzip_single(src_file, dest_dir, password=None):
 
 def down_load_chrome(url):
     # open in binary mode
-    file_name = url.split('/')[-1]
-    with open(prefix+file_name, "wb") as file:
+    file_name = prefix+url.split('/')[-1]
+    if os.path.exists(file_name):
+        return file_name
+    with open(file_name, "wb") as file:
         # get request
         response = get(url)
         # write to file
@@ -139,7 +141,7 @@ if __name__ == "__main__":
     sel = notice_input(['未安装，现在安装', '已安装跳过'], '是否安装Chrome浏览器（默认0）')
     if sel == 0:
         file_chrome = down_load_chrome(url_chrome)
-        r_v = os.system(prefix+file_chrome)
+        r_v = os.system(file_chrome)
         print(r_v)
     sel = notice_input(['未安装，现在安装', '已安装跳过'], '是否自动下载安装Chromedriver（默认0）')
     if sel == 0:
