@@ -6,7 +6,7 @@
 
 
 ## 快速使用（小白请按照安装文档来一步步完成）
-1. 安装好python3，pip（添加环境变量）和网易邮箱大师，
+1. 安装好python3，pip（添加环境变量）[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487)和网易邮箱大师，
 
 1. 双击config.bat，完成配置
 

@@ -74,7 +74,7 @@ def write_to_file(df_list, file_name,prefix='./',mode='w'):
     with open(os.path.join(prefix,file_name), mode) as f:
         for df in df_list:
             for i in df.index:
-                f.write(df.loc[i, 'username']+'---'+df.loc[i,'userpwd']+'\n')
+                f.write(str(df.loc[i, 'username'])+'---'+str(df.loc[i,'userpwd'])+'\n')
                 # if len(df_list)==2 and i == 25:
                 #     f.write(df.loc[0, 'username']+'---'+df.loc[0,'userpwd']+'\n')
 
