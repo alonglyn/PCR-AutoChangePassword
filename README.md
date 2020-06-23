@@ -6,10 +6,12 @@
 
 
 ## 快速使用（小白请按照安装文档来一步步完成）
-0. 自行安装网易邮箱大师
-1. 双击`install.bat` 安装python3和pip3，安装选项参考右方教程[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487))**务必勾选pip和添加到PATH，这样会自动添加环境变量**
-2. 双击`config.bat`完成配置（win10默认的是gbk的，我已将脚本改成gbk格式的了，一般不会出现闪退了）
-3. 然后双击`start.bat`，开始使用
+
+0. 我的脚本都是utf-8格式的， 你们需要把系统默认编码格式改成utf-8, 方法见[链接](https://jingyan.baidu.com/article/25648fc1471e6a9191fd002e.html)。 或者会的人自己修改脚本文本为gbk格式
+1. 自行安装网易邮箱大师
+2. 自己下载安装python, 或者双击`install.bat`自动安装python（比较慢，不推荐），安装选项参考右方教程[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487))**务必勾选pip和添加到PATH，这样会自动添加环境变量**
+3. 双击`config.bat`完成配置
+4. 然后双击`start.bat`，开始使用
 
 
 # 脚本说明

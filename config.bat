@@ -1,6 +1,5 @@
-set MY_PATH=C:\Program Files\Python37\Script
-set ENV_PATH=%PATH%;%MY_PATH%
-@echo ====new environment：
+set DIRNAME=.\downloads
+if not exist %DIRNAME% md %DIRNAME%
 @echo 开始安装py包
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --user
 @echo 开始配置
