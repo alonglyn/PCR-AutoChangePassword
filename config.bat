@@ -1,10 +1,10 @@
 set MY_PATH=C:\Program Files\Python37\Script
 set ENV_PATH=%PATH%;%MY_PATH%
-@echo ====new environment£º
-@echo ¿ªÊ¼°²×°py°ü
+@echo ====new environmentï¼š
+@echo å¼€å§‹å®‰è£…pyåŒ…
 pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple --user
-@echo ¿ªÊ¼ÅäÖÃ
+@echo å¼€å§‹é…ç½®
 call python set_config.py
 
-@echo ¿ªÊ¼ÏÂÔØ
+@echo å¼€å§‹ä¸‹è½½
 call python download.py
