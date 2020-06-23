@@ -1,6 +1,6 @@
+@echo
 set MY_PATH=C:\Program Files (x86)\Google\Chrome\Application;
-set ENV_PATH=%PATH%;%MY_PATH%
+set PATH=%PATH%;%MY_PATH%
 @echo ====new environment
-@echo %ENV_PATH%
-
-start python main.py
+echo %PATH%
+python main.py

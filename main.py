@@ -1,6 +1,7 @@
 from core.bili_change import *
 from core.data_help import notice_input
-
+# import sys
+# sys.path.append('C:\Program Files (x86)\Google\Chrome\Application')
 
 
 if __name__ == "__main__":

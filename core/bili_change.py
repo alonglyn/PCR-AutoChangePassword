@@ -1,4 +1,5 @@
 from selenium import webdriver
+import os
 import pandas as pd
 from random import choice
 import time
@@ -28,7 +29,15 @@ def lazy_browser():
     return browser
 
 def get_browser():
-    browser = webdriver.Chrome(executable_path='chromedriver.exe')
+    try:
+        if os.path.isfile('chromedriver.exe'):
+            browser = webdriver.Chrome(executable_path='chromedriver.exe')
+        else:
+            browser = webdriver.Chrome()
+    except Exception as e:
+        print(e)
+        print('请执行config.bat 或者自行下载chrome和chromedriver， 并加入环境变量')
+        raise e
     return browser
 '''主要功能函数'''
 
