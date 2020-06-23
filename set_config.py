@@ -3,9 +3,9 @@ import pyautogui as pag
 from core.data_help import notice_input
 
 def test():
-    print('尽快将鼠标放在邮箱界面的添加邮箱 处 停止15s,会自动点击 \
-        然后放在登录按钮上15s,会自动点击\
-        然后放在关闭按钮上15s,会自动点击')
+    print('尽快将鼠标放在邮箱界面的添加邮箱 处 停止10s,会自动点击 \
+        然后放在登录按钮上10s,会自动点击\
+        然后放在关闭按钮上10s,会自动点击')
     sz = pag.size()
     times = 0
     d = dict()
@@ -20,7 +20,7 @@ def test():
                 d[pos] += 1
             else:
                 d[pos] = 1
-            if d[pos] >= 15:
+            if d[pos] >= 10:
                 ret.append((pos.x,pos.y))
                 d[pos] = -20
                 cp += 1
@@ -50,29 +50,31 @@ def test():
     finally:
         return ret
 
-sel = notice_input(['不修改','修改'],'是否要修改默认密码')
-if sel == 1:
-    password = ''
-    while True:
-        password = input('输入自定义密码， 输入回车结束，使用随机密码直接回车\n').strip()
-        if not password:
-            break
-        while True:
-            a = input('密码是:%s\n, 确定使用直接输入回车， 否则输入N\n'%password).strip()
-            if not a:
-                confirm = True
-                break
-            else:
-                confirm = False
-                break
-        if confirm:
-            break
 
-sel = notice_input(['不录制','录制'],'是否要录制添加邮件点')
-if sel == 1:
-    poss = test()
-    with open('config.py','a') as f:
-        f.write('\npassword = "%s"\n'%password)
-        for i, pos in enumerate(poss):
-            f.write('\npos%d = (%d, %d)\n'%(i+1,pos[0], pos[1]))
-    print('完成配置到config.py文件中')
+if __name__ == "__main__":
+    password = ''
+    sel = notice_input(['不修改','修改'],'是否要修改默认密码')
+    if sel == 1:
+        while True:
+            password = input('输入自定义密码， 输入回车结束，使用随机密码直接回车\n').strip()
+            if not password:
+                break
+            while True:
+                a = input('密码是:%s\n, 确定使用直接输入回车， 否则输入N\n'%password).strip()
+                if not a:
+                    confirm = True
+                    break
+                else:
+                    confirm = False
+                    break
+            if confirm:
+                break
+
+    sel = notice_input(['不录制','录制'],'是否要录制添加邮件点')
+    if sel == 1:
+        poss = test()
+        with open('config.py','a') as f:
+            f.write('\npassword = "%s"\n'%password)
+            for i, pos in enumerate(poss):
+                f.write('\npos%d = (%d, %d)\n'%(i+1,pos[0], pos[1]))
+        print('完成配置到config.py文件中')
