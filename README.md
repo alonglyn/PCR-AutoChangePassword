@@ -6,7 +6,7 @@
 
 
 ## 快速使用（小白请按照安装文档来一步步完成）
-
+[notepad++下载地址(用迅雷下载快)](https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v7.8.1/npp.7.8.1.bin.x64.zip)
 0. 我的脚本都是utf-8格式的， 你们需要把系统默认编码格式改成utf-8, 方法见[链接](https://jingyan.baidu.com/article/25648fc1471e6a9191fd002e.html)。 或者会的人自己修改脚本文本为gbk格式[notepad++修改教程](https://jingyan.baidu.com/article/63f23628c0cab24208ab3d8d.html)**务必保证account.txt和mail.txt是utf-8的**， **其他的bat脚本根据自己电脑的情况选择gb或者是utf-8**
 1. 自行安装网易邮箱大师
 2. 自己下载安装python, 或者双击`install.bat`自动安装python（比较慢，不推荐），安装选项参考右方教程[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487))**务必勾选pip和添加到PATH，这样会自动添加环境变量**
