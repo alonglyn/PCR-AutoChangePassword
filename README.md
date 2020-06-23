@@ -6,11 +6,10 @@
 
 
 ## 快速使用（小白请按照安装文档来一步步完成）
-1. 安装好python3，pip（添加环境变量）[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487)和网易邮箱大师，
-
-1. 双击config.bat，完成配置
-
-1. 然后双击start.bat，开始使用
+0. 自行安装网易邮箱大师
+1. 双击`install.bat` 安装python3和pip3，也可自行安装[安装教程参考链接（numpy不用装）](https://blog.csdn.net/yedaqiang/article/details/99681487)和网易邮箱大师
+2. 双击`config.bat`完成配置（win10默认的是gbk的，我已将脚本改成gbk格式的了，一般不会出现闪退了）
+3. 然后双击`start.bat`，开始使用
 
 
 # 脚本说明

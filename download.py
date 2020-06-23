@@ -144,4 +144,3 @@ if __name__ == "__main__":
     sel = notice_input(['未安装，现在安装', '已安装跳过'], '是否自动下载安装Chromedriver（默认0）')
     if sel == 0:
         down_load_driver()
-    print('下载完成,请按照教程将chrome的目录添加到环境变量， 默认位置为')
