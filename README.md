@@ -1,4 +1,4 @@
-[码云镜像地址](git config --global core.autocrlf false)
+[码云镜像地址](https://gitee.com/alonglyn_0/PCR-AutoChangePassword)
 
 [老版本视频教程(投稿者不是本人)](https://b23.tv/0c4Aok)
 # 新版本说明
