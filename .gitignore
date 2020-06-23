@@ -8,4 +8,3 @@ __pycache__/
 set_config.py
 *.exe
 *.zip
-install.bat
