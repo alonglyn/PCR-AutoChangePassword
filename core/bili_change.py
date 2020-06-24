@@ -202,9 +202,9 @@ def check_login(df):
 
 
 @with_open
-def add_all_mail(*args, time_delay):
+def add_all_mail(*args, time_delay, times):
     for df in args:
-        auto_add_mail(df,time_delay)
+        auto_add_mail(df,time_delay, times)
 
 def extract_account():    
     notice1 = '''

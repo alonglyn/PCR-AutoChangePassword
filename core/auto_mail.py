@@ -29,13 +29,17 @@ class WinMouseKeyBorad():
         pag.moveTo(pos3) # 填x掉小窗口的点
         pag.click()
 
-def auto_add_mail(df, time_delay = 1):
+def auto_add_mail(df, time_delay = 1, times = 10):
     wmkb = WinMouseKeyBorad()
     addCol(df,'added')
+    cnt = 0
     for i in df.index:
         if df.loc[i,'added'] == 0:
             wmkb.add_one(df.loc[i,'mail_add'], df.loc[i, 'mail_pwd'], time_delay)
             df.loc[i,'added'] = 1
+            cnt+=1
+            if cnt == times:
+                break
 
 
 

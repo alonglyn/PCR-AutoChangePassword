@@ -23,15 +23,16 @@ if __name__ == "__main__":
     if cmd == 5 or cmd == 1:
         extract_mail()
     if cmd == 5 or cmd == 2:
-        sel = notice_input(['添加全部邮箱', '仅添加账号绑定的邮箱','仅添加未绑定的邮箱'])
+        sel = notice_input(['添加全部邮箱', '仅添加account.xlsx里的邮箱','仅添加mail.xlsx里的邮箱'])
+        sel1 = notice_input(['10','20','30','40','50'],'输入单词添加邮箱的最大数量')
         sel2 = notice_input(['0.5s','1s','3s','5s','10s'], '登录等待时间选择（默认选0）(一般默认即可比较快， 网络不好建议选3s以上）')
         print('将网易邮箱大师打开，弄到邮箱设置界面，全屏，再回来命令行选择自动启动倒计时时间')
         sel3 = notice_input(['5s','10s','15s','20s',],'倒计时时间选择(默认0)。\n 启动倒计时后， 迅速切换到网易邮箱大师界面，不动，中间不能动鼠标也不能停止直到执行完毕\n')
         time.sleep((sel3+1)*5)
         if sel == 0 or sel == 1:
-            add_all_mail(files[2], time_delay=sel2)
+            add_all_mail(files[2], time_delay=sel2,times=sel1*10+10)
         if sel == 0 or sel == 2:
-            add_all_mail(files[3], time_delay=sel2)
+            add_all_mail(files[3], time_delay=sel2,times=sel1*10+10)
     if cmd == 5 or cmd == 3:
         sel = notice_input(['使用重置密码接口','使用修改密码接口'])
         change_password(files[2], sel=sel)
