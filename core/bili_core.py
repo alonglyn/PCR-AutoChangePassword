@@ -35,7 +35,7 @@ class NoMailException(Exception):
 class WebDriverHelp():
     def __init__(self):
         super().__init__()
-    def wait_for(self,a,b,max_times = 6):
+    def wait_for(self,a,b,max_times = 12):
         '''超时重试，默认6次'''
         times = 0
         while True:
@@ -50,7 +50,7 @@ class WebDriverHelp():
             else:
                 return ret
 
-    def wait_for_class(self, e, cls,max_times = 60):
+    def wait_for_class(self, e, cls,max_times = 120):
         '''检查已存在元素是否具有某属性, 默认2min'''
         times = 0
         while cls not in e.get_attribute('class').split():
