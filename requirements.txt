@@ -22,7 +22,7 @@ Pillow==7.1.2
 prompt-toolkit==3.0.5
 PyAutoGUI==0.9.50
 PyGetWindow==0.0.8
-Pygments==2.6.1
+Pygments==2.7.4
 PyInstaller==3.6
 PyMsgBox==1.0.8
 pyperclip==1.8.0
